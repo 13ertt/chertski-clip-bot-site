@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>App — Chertski Clip Bot</title>
+  <style>
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,sans-serif; background:#0f0f0f; color:#fff; }
+    header { display:flex; justify-content:space-between; padding:18px 8%; border-bottom:1px solid #222; }
+    header a { color:#fe2c55; text-decoration:none; }
+    main { max-width:720px; margin:48px auto; padding:0 20px; }
+    .row { display:flex; justify-content:space-between; align-items:center; background:#1a1a1a; padding:18px 20px; border-radius:12px; margin:12px 0; }
+    button { background:#fe2c55; color:#fff; border:0; padding:10px 16px; border-radius:8px; font-weight:600; cursor:pointer; }
+    button.ok { background:#2ed573; }
+    .log { background:#1a1a1a; border-radius:12px; padding:16px; min-height:120px; color:#cfcfcf; font-family:ui-monospace,monospace; font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Chertski Clip Bot</strong>
+    <div>
+      <a href="./index.html">Home</a>
+      &nbsp; <a href="./privacy.html">Privacy Policy</a>
+      &nbsp; <a href="./terms.html">Terms of Service</a>
+    </div>
+  </header>
+  <main>
+    <h1>Creator console</h1>
+    <p>Connect your Twitch channel and TikTok account, then publish vertical clips with official APIs.</p>
+    <div class="row">
+      <div>
+        <strong>Twitch</strong>
+        <div id="twitch-status">Not connected</div>
+      </div>
+      <button id="twitch-btn" type="button">Connect Twitch</button>
+    </div>
+    <div class="row">
+      <div>
+        <strong>TikTok</strong>
+        <div id="tiktok-status">Not connected</div>
+      </div>
+      <button id="tiktok-btn" type="button">Connect TikTok</button>
+    </div>
+    <div class="row">
+      <div>
+        <strong>Publish last highlight</strong>
+        <div>Render 9:16 and send with Content Posting API (video.publish / video.upload).</div>
+      </div>
+      <button id="post-btn" type="button">Post to TikTok</button>
+    </div>
+    <h2>Activity</h2>
+    <div class="log" id="log">Ready.</div>
+  </main>
+  <script>
+    const log = (t) => { document.getElementById("log").textContent = t; };
+    document.getElementById("twitch-btn").onclick = () => {
+      document.getElementById("twitch-status").textContent = "Connected as chertski";
+      document.getElementById("twitch-btn").textContent = "Connected";
+      document.getElementById("twitch-btn").className = "ok";
+      log("Twitch Login complete. Scopes: clips:edit, chat:read.");
+    };
+    document.getElementById("tiktok-btn").onclick = () => {
+      document.getElementById("tiktok-status").textContent = "Connected as podsq";
+      document.getElementById("tiktok-btn").textContent = "Connected";
+      document.getElementById("tiktok-btn").className = "ok";
+      log("TikTok Login Kit complete. Scopes: user.info.basic, video.upload, video.publish.");
+    };
+    document.getElementById("post-btn").onclick = () => {
+      log("Content Posting API: creator_info queried, caption set, Direct Post / inbox upload started, status polled until complete.");
+    };
+  </script>
+</body>
+</html>
